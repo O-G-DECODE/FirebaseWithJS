@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <button onclick="Logout()">Logout</button>
+    </header>
+    <h2 id="user"> </h2>
+
+    <div>
+        <br>
+        <div>
+            Enter name : <input type="text" id="name" name="name">
+        </div>
+        <div>
+            Enter Phone : <input type="text" id="Phone" name="Phone">
+        </div>
+        <div>
+            Enter address : <input type="text" id="address" name="address">
+        </div>
+
+        <button onclick="addUser()">Submit</button>
+    </div>
+
+    <div>
+        <ul id="userlist">
+
+        </ul>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+
+    <script>
+        
+
+        const firebaseConfig = {
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+};
+
+        firebase.initializeApp(firebaseConfig)
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                document.getElementById('user').innerHTML = "Welcome : " + user.email
+            } else {
+                window.location = "index.html"
+            }
+        })
+
+        // database
+        const db = firebase.database()
+
+        function addUser() {
+            let name = document.getElementById("name").value
+            let Phone = document.getElementById("Phone").value
+
+            let address = document.getElementById("address").value
+            db.ref("users").push({
+                name: name,
+                Phone: Phone,
+                address: address
+            });
+
+        }
+
+        db.ref("users").on("value", (e) => {
+            let data = e.val()
+            let a = ""
+
+            for (let id in data) {
+                a += `
+                <li> 
+                    ${data[id].name} -  ${data[id].Phone} - ${data[id].address}
+                    <button  onclick="Edituser('${id}', '${data[id].name}' , '${data[id].Phone}' , '${data[id].address}')">Edit User </button>
+                    <button onclick="Delete('${id}')">Delete </button>
+                </li>   
+                `
+
+
+            }
+            document.getElementById("userlist").innerHTML = a
+        })
+
+        function Edituser(id, name, Phone, address) {
+            document.getElementById("name").value = name
+            document.getElementById("Phone").value = Phone
+            document.getElementById("address").value = address
+
+            let newname = prompt("Enter new Name", name)
+            let newPhone = prompt("Enter new Phone ", Phone)
+
+            let newaddress = prompt("Enter new Name", address)
+            db.ref("users/" + id).update({
+                name: newname,
+                Phone: newPhone,
+                address: newaddress
+            })
+
+        }
+        function Delete(id) {
+            db.ref("users/" + id).remove()
+        }
+
+        function Logout() {
+            firebase.auth().signOut().then(() => {
+                window.location = "index.html"
+            })
+        }
+
+    </script>
+
+
+</body>
+
+</html>

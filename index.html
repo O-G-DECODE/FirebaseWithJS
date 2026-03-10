@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Firebase Auth</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h2>Signup / Login</h2>
+
+    <input type="email" id="email" placeholder="Email"><br><br>
+    <input type="password" id="password" placeholder="Password"><br><br>
+
+    <button onclick="signup()">Signup</button>
+    <button onclick="login()">Login</button>
+    <button onclick="ForgotPassword()">Forgot Password</button>
+
+    <p id="msg"></p>
+
+    <h3 id="user"></h3>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+    <script>
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyBaRbpf1unP5OAcNvZIBBq8eATipazy5lw",
+            authDomain: "loginpage-1c095.firebaseapp.com"
+        }
+
+        firebase.initializeApp(firebaseConfig)
+
+        function signup() {
+
+            let email = document.getElementById("email").value
+            let password = document.getElementById("password").value
+
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then(() => { document.getElementById("msg").innerHTML = "Signup Successful" })
+                .catch(e => { document.getElementById("msg").innerHTML = e.message })
+
+        }
+
+        function login() {
+
+            let email = document.getElementById("email").value
+            let password = document.getElementById("password").value
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then(() => { window.location="dashboad.html" })
+                .catch(e => { document.getElementById("msg").innerHTML = e.message })
+
+        }
+        function ForgotPassword(){
+            let email = document.getElementById("email").value
+            firebase.auth().sendPasswordResetEmail(email)
+            .then(()=>{
+                document.getElementById("msg").innerHTML="password reset link send to email"
+            })
+            .catch((error)=>{
+                document.getElementById("msg").innerHTML=error.message
+            })
+        }
+
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                document.getElementById("user").innerHTML = "Logged in: " + user.email
+            }
+        })
+
+
+    </script>
+
+</body>
+
+</html>

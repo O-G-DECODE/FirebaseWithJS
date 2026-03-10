@@ -1,0 +1,75 @@
+/* 1. Center everything on the screen */
+.body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Horizontal center */
+    align-items: center;     /* Vertical center */
+    min-height: 100vh;       /* Full screen height */
+    background-color: #f4f7f6; /* Light grey background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 2. Style the Login Box with a border and shadow */
+.Login {
+    background-color: white;
+    padding: 30px;
+    border: 2px solid #3498db; /* Blue border */
+    border-radius: 12px;       /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    width: 100%;
+    max-width: 350px;          /* Prevents it from getting too wide */
+    text-align: center;
+}
+
+/* 3. Style the inputs and buttons for a modern look */
+.Login div {
+    margin-bottom: 15px;
+    text-align: left; /* Keep labels left-aligned inside the box */
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensures padding doesn't break width */
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+/* Login button (Submit) */
+button[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+}
+
+button[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+/* Signup button (Secondary) */
+button[type="button"] {
+    background-color: #ecf0f1;
+    color: #333;
+    margin-top: 5px;
+}
+
+button[type="button"]:hover {
+    background-color: #bdc3c7;
+}
+
+#message {
+    font-size: 14px;
+    font-weight: bold;
+}
