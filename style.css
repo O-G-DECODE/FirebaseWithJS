@@ -1,75 +1,87 @@
-/* 1. Center everything on the screen */
-.body {
+
+/* Page Styling */
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center; /* Horizontal center */
-    align-items: center;     /* Vertical center */
-    min-height: 100vh;       /* Full screen height */
-    background-color: #f4f7f6; /* Light grey background */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* 2. Style the Login Box with a border and shadow */
-.Login {
-    background-color: white;
-    padding: 30px;
-    border: 2px solid #3498db; /* Blue border */
-    border-radius: 12px;       /* Rounded corners */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    width: 100%;
-    max-width: 350px;          /* Prevents it from getting too wide */
     text-align: center;
 }
 
-/* 3. Style the inputs and buttons for a modern look */
-.Login div {
-    margin-bottom: 15px;
-    text-align: left; /* Keep labels left-aligned inside the box */
+/* Header */
+header{
+    background-color: #2c3e50;
+    padding: 15px;
+    color: white;
 }
 
-input {
-    width: 100%;
+/* Titles */
+h2{
+    color: #333;
+    margin-top: 20px;
+}
+
+/* Form container */
+div{
+    margin: 10px auto;
+}
+
+/* Input fields */
+input{
+    width: 250px;
     padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
+    margin: 5px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; /* Ensures padding doesn't break width */
+    font-size: 14px;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    margin: 10px;
-    cursor: pointer;
+/* Buttons */
+button{
+    padding: 10px 15px;
+    margin: 5px;
     border: none;
     border-radius: 5px;
-    transition: background 0.3s ease;
-}
-
-/* Login button (Submit) */
-button[type="submit"] {
     background-color: #3498db;
     color: white;
-    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
 }
 
-button[type="submit"]:hover {
+/* Button hover */
+button:hover{
     background-color: #2980b9;
 }
 
-/* Signup button (Secondary) */
-button[type="button"] {
-    background-color: #ecf0f1;
-    color: #333;
-    margin-top: 5px;
+/* Logout button */
+header button{
+    background-color: #e74c3c;
 }
 
-button[type="button"]:hover {
-    background-color: #bdc3c7;
+/* User list */
+ul{
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
 }
 
-#message {
-    font-size: 14px;
+/* User list items */
+li{
+    background-color: white;
+    margin: 10px auto;
+    padding: 10px;
+    width: 400px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Message text */
+#msg{
+    color: red;
     font-weight: bold;
+}
+
+/* Welcome text */
+#user{
+    color: #27ae60;
 }
